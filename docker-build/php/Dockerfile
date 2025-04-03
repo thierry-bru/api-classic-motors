@@ -27,4 +27,5 @@ RUN a2enmod ssl
 RUN a2ensite default-ssl.conf
 # #Setup certbot
 # RUN apt-get install certbot python3-certbot-apache -y
+
 # RUN certbot --apache --agree-tos --redirect --hsts --staple-ocsp --email thierry-bru@laposte.net -d api-classic-motors.networked-hells.com
