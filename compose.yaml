@@ -6,6 +6,7 @@ services:
             - "443:443"
         volumes:
             - .:/var/www/api-classic-motors/
+            - /home/logs/:/var/www/api-classic-motors/var/cache/
         links:
             - db:db
     db:
