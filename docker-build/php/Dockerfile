@@ -10,6 +10,7 @@ RUN apt update
 RUN apt install -y git
 #Installer zip
 RUN apt install -y zip
+RUN apt install nano
 #pour symfony
 RUN apt-get update -y && apt-get install -y libmcrypt-dev
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -19,13 +20,19 @@ RUN apt-get install -y gcc
 RUN apt-get install -y libcurl4-openssl-dev
 RUN docker-php-ext-install curl
 RUN docker-php-ext-enable curl
+
+
+
 # Prepare fake SSL certificate
-RUN apt-get install -y ssl-cert
+RUN set -eux; \
+    apt-get update; \
+    apt-get install ssl-cert; \
+    a2enmod ssl; \
+    a2ensite default-ssl
 # Setup Apache2 mod_ssl
 RUN a2enmod ssl
 # Setup Apache2 HTTPS env
 RUN a2ensite default-ssl.conf
 # #Setup certbot
 # RUN apt-get install certbot python3-certbot-apache -y
-
 # RUN certbot --apache --agree-tos --redirect --hsts --staple-ocsp --email thierry-bru@laposte.net -d api-classic-motors.networked-hells.com
